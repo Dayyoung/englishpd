@@ -83,6 +83,14 @@ input[type=submit]:hover {
     <option selected value="all">전체</option>
 	</select>
 
+  <label id="gradeValueLabel" style="display: none;" for="gradeValue">학년:</label>
+    <select id="gradeValue" style="display: none;" name="gradeValue">
+      <option selected disabled>---선택하세요---</option>
+      <option value="1학년">1학년</option>
+      <option value="2학년">2학년</option>
+      <option value="3학년">3학년</option>
+    </select>
+
 	<label for="dateValue">날짜:</label><br>    
 	<input type="date" id="dateValue" />
 
@@ -166,6 +174,10 @@ var userList = csvToJSON(userListData)
 
 console.log(userList);
 
+
+var select = document.getElementById("selectValue");
+
+
 var dupArr =  [];
 
 for (var i = 0; i < userList.length; i++) {
@@ -174,23 +186,43 @@ for (var i = 0; i < userList.length; i++) {
 
 console.log(dupArr);
 
-const uniqueArr = dupArr.filter((element, index) => {
+var uniqueArr = dupArr.filter((element, index) => {
     return dupArr.indexOf(element) === index;
 });
 
 console.log(uniqueArr);
 
-
-var select = document.getElementById("selectValue");
-
-
- $('#selectValue').append('<option disabled>---수업반---</option>');
+$('#selectValue').append('<option disabled>---수업반---</option>');
 
 for (var i = 0; i < uniqueArr.length; i++) {
     var select = document.getElementById("selectValue");
     var option = document.createElement("option");
     option.text = uniqueArr[i];
     option.value = uniqueArr[i];
+    select.add(option);
+}
+
+var dupArrForS =  [];
+
+for (var i = 0; i < userList.length; i++) {
+    dupArrForS.push(userList[i]["학교"])
+}
+
+console.log(dupArrForS);
+
+var uniqueArrForS = dupArrForS.filter((element, index) => {
+    return dupArrForS.indexOf(element) === index;
+});
+
+console.log(uniqueArrForS);
+
+$('#selectValue').append('<option disabled>---학교---</option>');
+
+for (var i = 0; i < uniqueArrForS.length; i++) {
+    var select = document.getElementById("selectValue");
+    var option = document.createElement("option");
+    option.text = uniqueArrForS[i];
+    option.value = uniqueArrForS[i];
     select.add(option);
 }
 
@@ -203,6 +235,18 @@ for (var i = 0; i < userList.length; i++) {
     option.value = userList[i]['학생아이디'];
     select.add(option);
 }
+
+$('#selectValue').change(function(){
+  if(uniqueArrForS.indexOf(this.value) != -1){
+    console.log(this.value) 
+    $('#gradeValue').show()
+    $('#gradeValueLabel').show()
+  }else{
+
+    $('#gradeValue').hide()
+    $('#gradeValueLabel').hide()
+  }
+});
 
 
 //$('body').loadingModal({text: '생성중...'})
@@ -225,11 +269,19 @@ document.getElementById("selectValue").value = studentId;
 $("#submitButton").click(function() {
 
 
-  if($("#selectValue").val() == null){
+  var selectValue = $('#selectValue').val();
+
+  if(selectValue  == null){
     alert('입력유형을 선택하세요.')
     return;
   }
 
+   var selectGrade = $("#gradeValue").val()
+   
+   if(uniqueArrForS.indexOf(selectValue) != -1 && selectGrade == null){
+    alert('학년유형을 선택하세요.')
+      return;
+  }
 
   $('body').loadingModal({text: '생성중...'})
 
@@ -251,7 +303,15 @@ $("#submitButton").click(function() {
 				createData(userList[i]["학생아이디"],userList[i]["이름"],userList[i]["수업반"],userList[i]["학교"],userList[i]["학년"]);
 			}
 		}
-	}else{
+	}
+  else if(uniqueArrForS.indexOf(selectValue) != -1){
+
+    for(i in userList){
+      if(selectValue == userList[i]["학교"] && selectGrade == userList[i]["학년"]){
+        createData(userList[i]["학생아이디"],userList[i]["이름"],userList[i]["수업반"],userList[i]["학교"],userList[i]["학년"]);
+      }
+    }
+  }else{
 
     var classname = '';
     var school = '';
