@@ -810,12 +810,14 @@ for (var date of uniqueArr){
    }
     item.push(date)
     item.push(itemValue/itemCount)
-    item.push('color: black')
+    item.push('color: FFD68A')
     item.push(userPoint)
-    item.push('color: gray')
+    item.push('color: FFA500')
     item.push(5)
     item.push('color: red')
     gData0.push(item)
+
+    
 }
 
 console.log(gData0);
@@ -1457,7 +1459,7 @@ table, th, td {
           hAxis: {title: '기간'},
           seriesType: 'bars',
           series: {2: {type: 'line'}},
-          colors: ['black', 'gray', 'red']
+          colors: ['#FFD68A', '#FFA500', 'red']
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div0'));
