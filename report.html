@@ -817,10 +817,10 @@ for (var date of uniqueArr){
     item.push('color: red')
     gData0.push(item)
 
-    
+
 }
 
-console.log(gData0);
+//console.log(gData0);
 
 
 
@@ -1428,25 +1428,92 @@ table, th, td {
       //google.charts.setOnLoadCallback(drawChart);
       function drawChart(gData0,gData1, gData2, gData3, gData4, gData5) {
 
-        if(gData0.length > 1){
+        // console.log(gData0)
+        // console.log(gData3)
+        
+        var mypoint0 = 0
+        for (var i of gData0) {
+          console.log(i[3])
+          var myPoint = parseInt(i[3])
+          if(!isNaN(myPoint)){
+            mypoint0 += myPoint
+          }
+        }
+        console.log("mypoint0 >> "+ mypoint0)
+
+        var mypoint1 = 0
+        for (var i of gData1) {
+          console.log(i[3])
+          var myPoint = parseInt(i[3])
+          if(!isNaN(myPoint)){
+            mypoint1 += myPoint
+          }
+        }
+        console.log("mypoint1 >> "+ mypoint1)
+
+
+        var mypoint2 = 0
+        for (var i of gData2) {
+          console.log(i[3])
+          var myPoint = parseInt(i[3])
+          if(!isNaN(myPoint)){
+            mypoint2 += myPoint
+          }
+        }
+        console.log("mypoint2 >> "+ mypoint2)
+
+
+        var mypoint3 = 0
+        for (var i of gData3) {
+          console.log(i[3])
+          var myPoint = parseInt(i[3])
+          if(!isNaN(myPoint)){
+            mypoint3 += myPoint
+          }
+        }
+        console.log("mypoint3 >> "+ mypoint3)
+
+        var mypoint4 = 0
+        for (var i of gData4) {
+          console.log(i[3])
+          var myPoint = parseInt(i[3])
+          if(!isNaN(myPoint)){
+            mypoint4 += myPoint
+          }
+        }
+        console.log("mypoint4 >> "+ mypoint4)
+
+
+        var mypoint5 = 0
+        for (var i of gData5) {
+          console.log(i[3])
+          var myPoint = parseInt(i[3])
+          if(!isNaN(myPoint)){
+            mypoint5 += myPoint
+          }
+        }
+        console.log("mypoint5 >> "+ mypoint5)
+
+
+        if(mypoint0 > 1){
           $('#chart_div0').show()
         }
-        if(gData1.length > 1){
-          $('#chart_div1').show()
-        }
-        if(gData2.length > 1){
+        if(mypoint1  > 1){
           $('#chart_div2').show()
-          
         }
-        if(gData3.length > 1){
+        if(mypoint2  > 1){
           $('#chart_div3').show()
           
         }
-        if(gData4.length > 1){
+        if(mypoint3  > 1){
+          $('#chart_div1').show()
+          
+        }
+        if(mypoint4  > 1){
           $('#chart_div4').show()
           
         }
-        if(gData5.length > 1){
+        if(mypoint5  > 1){
           $('#chart_div5').show()
           
         }
