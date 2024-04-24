@@ -783,19 +783,19 @@ for (var date of uniqueArr){
       var intValue = 0;
 
       if(i["과제평가"] == "A"){
-        intValue = 5
+        intValue = 100
       }
       if(i["과제평가"] == "B"){
-        intValue = 4
+        intValue = 80
       }
       if(i["과제평가"] == "C"){
-        intValue = 3
+        intValue = 60
       }
       if(i["과제평가"] == "D"){
-        intValue = 2
+        intValue = 40
       }
       if(i["과제평가"] == "F"){
-        intValue = 1
+        intValue = 20
       }
 
       if(!isNaN(intValue))
@@ -808,19 +808,25 @@ for (var date of uniqueArr){
       itemCount = itemCount+1;
       }
    }
+
+
+console.log("!!!!! " + itemValue);
+
+
+console.log("!!!!! " + itemCount);
     item.push(date)
     item.push(itemValue/itemCount)
     item.push('color: FFD68A')
     item.push(userPoint)
     item.push('color: FFA500')
-    item.push(5)
+    item.push(100)
     item.push('color: red')
     gData0.push(item)
 
 
 }
 
-//console.log(gData0);
+console.log("!!!!! " + gData0);
 
 
 
