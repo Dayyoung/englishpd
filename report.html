@@ -609,6 +609,11 @@ var totalListData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-
 var totalList = csvToJSON(totalListData)
 
 
+var reportData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pub?gid=1151440459&single=true&output=csv')
+
+var reportList = csvToJSON(reportData)
+
+
 var checkSumData = GsheetToJSON('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pubhtml?gid=64744039&single=true')
 
 var header = getHeadFromCSV(totalListData);
@@ -877,16 +882,14 @@ for (var i of totalListForUser) {
     $('.totalValue').html($('.totalValue').html() + i["날짜"] +"  "+ i["메모"] + "<br>" )
 
 
+
+
     $('#tbAdapter').append(tbItem)
 }
 
-
-for (var i of totalListForUser) {
-
-    if(i["상담"] != ''){
-
-    $('.opinionValue').append(i["날짜"] +" / 강사 의견 : "+ i["상담"])
-    $('.opinionValue').append("<br>")
+for (var i of reportList) {
+ if(USER["학생아이디"] == i["학생아이디"]){
+    $('.teacherValue').html(i["학부모메세지"])
   }
 }
 
@@ -1123,6 +1126,26 @@ table, th, td {
           <tr class="row8">
             <td class="column0 style30 " colspan="9" >
               <pre class= "totalValue" style="text-align:left; font-size:11pt; padding:10px; margin:0px;"></pre>
+            </td>
+          </tr>
+        </tbody>
+
+</table>
+
+
+<br>
+
+    <table border="1" cellpadding="0" cellspacing="0"  class="sheet0" style="width : 500px; 
+    border-color: gray;">
+  
+
+        <tbody>
+        <tr class="row7">
+            <td class="column0 style36 " colspan="9" style="text-align:left; font-size:11pt; padding:10px;">학부모님께 드리는 글</td>
+        </tr>
+          <tr class="row8">
+            <td class="column0 style30 " colspan="9" >
+              <pre class= "teacherValue" style="text-align:left; font-size:11pt; padding:10px; margin:0px;"></pre>
             </td>
           </tr>
         </tbody>
