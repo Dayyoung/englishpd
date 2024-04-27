@@ -604,7 +604,7 @@ var userListData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-1
 
 var userList = csvToJSON(userListData)
 
-var totalListData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pub?gid=281539744&single=true&output=csv')
+var totalListData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pub?gid=322683622&single=true&output=csv')
 
 var totalList = csvToJSON(totalListData)
 
@@ -887,8 +887,11 @@ for (var i of totalListForUser) {
     $('#tbAdapter').append(tbItem)
 }
 
+
+
 for (var i of reportList) {
  if(USER["학생아이디"] == i["학생아이디"]){
+  console.log(i["학부모메세지"])
     $('.teacherValue').html(i["학부모메세지"])
   }
 }
