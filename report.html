@@ -839,14 +839,14 @@ for (var i of totalListForUser) {
 
     var removeString = i["진도"].replace(/['"]+/g, '')
 
-    tbItem.find('.progressValue').html("<pre style=''>" + removeString + "</pre>")
+    tbItem.find('.progressValue').html("<pre style='white-space: pre-wrap;'>" + removeString + "</pre>")
     }
 
     if(i["과제평가"] != ''){
 
     var removeString = i["과제평가"].replace(/['"]+/g, '')
 
-    tbItem.find('.subjectValue').html("<pre>" + removeString + "</pre>")
+    tbItem.find('.subjectValue').html("<pre style='white-space: pre-wrap;'>" + removeString + "</pre>")
     }
 
     if(i["어휘"] != '')
@@ -1128,7 +1128,8 @@ table, th, td {
         </tr>
           <tr class="row8">
             <td class="column0 style30 " colspan="9" >
-              <pre class= "totalValue" style="text-align:left; font-size:11pt; padding:10px; margin:0px;"></pre>
+              <pre class= "totalValue" style="text-align:left; font-size:11pt; padding:10px; margin:0px; 
+    white-space: pre-wrap;"></pre>
             </td>
           </tr>
         </tbody>
@@ -1148,7 +1149,8 @@ table, th, td {
         </tr>
           <tr class="row8">
             <td class="column0 style30 " colspan="9" >
-              <pre class= "teacherValue" style="text-align:left; font-size:11pt; padding:10px; margin:0px;"></pre>
+              <pre class= "teacherValue" style="text-align:left; font-size:11pt; padding:10px; margin:0px; 
+    white-space: pre-wrap;"></pre>
             </td>
           </tr>
         </tbody>
