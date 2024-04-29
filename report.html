@@ -764,6 +764,9 @@ for (var date of uniqueArr){
     var barColor = colorArray[indexValue%6];
     var myColor = myColorArray[indexValue%6];
 
+    date = date.replaceAll("2024.","")
+    date = date.replaceAll("2025.","")
+    date = date.replaceAll(".","/")
 
     item.push(date)
     item.push(itemValue/itemCount)
