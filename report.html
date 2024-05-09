@@ -530,7 +530,8 @@ function getJsonList(url) {
 function getHeadFromCSV(csv_string) {
   const rows = csv_string.split("\r\n");
   const jsonArray = [];
-  const header = rows[0].split(",");
+  //const header = rows[0].split(",");
+  const header = rows[0].split("\t");
   return header;
 }
 
@@ -538,10 +539,12 @@ function getHeadFromCSV(csv_string) {
 function csvToJSON(csv_string) {
   const rows = csv_string.split("\r\n");
   const jsonArray = [];
-  const header = rows[0].split(",");
+  //const header = rows[0].split(",");
+  const header = rows[0].split("\t");
   for (let i = 1; i < rows.length; i++) {
     let obj = {};
-    let row = rows[i].split(",");
+    //let row = rows[i].split(",");
+    let row = rows[i].split("\t");
     for (let j = 0; j < header.length; j++) {
       obj[header[j]] = row[j];
     }
@@ -549,6 +552,7 @@ function csvToJSON(csv_string) {
   }
   return jsonArray;
 }
+
 
 function GsheetToJSON(requestUrl) {
 
@@ -595,18 +599,20 @@ setTimeout(function(){
 
 // try{
 
-var userListData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pub?gid=0&single=true&output=csv')
+var userListData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pub?gid=0&single=true&output=tsv')
 
 var userList = csvToJSON(userListData)
 
-var totalListData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pub?gid=322683622&single=true&output=csv')
+var totalListData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pub?gid=322683622&single=true&output=tsv')
 
 var totalList = csvToJSON(totalListData)
 
 
-var reportData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pub?gid=1151440459&single=true&output=csv')
+var reportData = getJsonList('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pub?gid=1151440459&single=true&output=tsv')
 
 var reportList = csvToJSON(reportData)
+
+console.log(reportList)
 
 
 var checkSumData = GsheetToJSON('https://docs.google.com/spreadsheets/d/e/2PACX-1vTL1l7kkGoqRycPXW-vkvYuxx4WvhE7BubWWCNlkZzKQbTufIQ19EM96sa6jVzdv0eNRFodaOFGL8k8/pubhtml?gid=64744039&single=true')
@@ -890,10 +896,14 @@ for (var i of totalListForUser) {
 
 for (var i of reportList) {
  if(USER["학생아이디"] == i["학생아이디"]){
-  console.log(i["학부모메세지"])
+  //console.log(i["학부모메세지"])
 
     if(i["학부모메세지"] != ''){
-      $('.teacherValue').html(i["학부모메세지"])
+
+      //var enterString = i["학부모메세지"].replaceAll(".",".\n")
+      var enterString = i["학부모메세지"].replaceAll("  ","\n")
+
+      $('.teacherValue').html(enterString)
       $('#teacherValueLayout').show()
     }
   }
@@ -1152,8 +1162,7 @@ table, th, td {
         </tr>
           <tr class="row8">
             <td class="column0 style30 " colspan="9" >
-              <pre class= "teacherValue" style="text-align:left; font-size:11pt; padding:10px; margin:0px; 
-    white-space: pre-wrap;"></pre>
+              <pre class= "teacherValue" style="text-align:left; font-size:11pt; padding:10px; margin:0px;line-height : 1.5; white-space: pre-wrap;"></pre>
             </td>
           </tr>
         </tbody>
