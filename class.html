@@ -294,13 +294,17 @@ $("#submitButton").click(function() {
 
 	if(selectValue == 'all'){
 		for(i in userList){
-        createData(userList[i]["학생아이디"],userList[i]["이름"],userList[i]["수업반"],userList[i]["학교"],userList[i]["학년"]);
+
+        if(userList[i]["등록/휴원 상태"].indexOf("휴원") == -1)
+          createData(userList[i]["학생아이디"],userList[i]["이름"],userList[i]["수업반"],userList[i]["학교"],userList[i]["학년"]);
 		}
 	}
 	else if(uniqueArr.indexOf(selectValue) != -1){
 		for(i in userList){
 			if(selectValue == userList[i]["수업반"]){
-				createData(userList[i]["학생아이디"],userList[i]["이름"],userList[i]["수업반"],userList[i]["학교"],userList[i]["학년"]);
+
+        if(userList[i]["등록/휴원 상태"].indexOf("휴원") == -1)
+				  createData(userList[i]["학생아이디"],userList[i]["이름"],userList[i]["수업반"],userList[i]["학교"],userList[i]["학년"]);
 			}
 		}
 	}
@@ -308,6 +312,8 @@ $("#submitButton").click(function() {
 
     for(i in userList){
       if(selectValue == userList[i]["학교"] && selectGrade == userList[i]["학년"]){
+
+        if(userList[i]["등록/휴원 상태"].indexOf("휴원") == -1)
         createData(userList[i]["학생아이디"],userList[i]["이름"],userList[i]["수업반"],userList[i]["학교"],userList[i]["학년"]);
       }
     }
@@ -316,15 +322,23 @@ $("#submitButton").click(function() {
     var classname = '';
     var school = '';
     var grade = '';
+    var state = '';
+
+    console.log("SOLO!!" + userList)
 
 		for(i in userList){
-      if(selectValue == userList[i]["이름"]){
+
+      if(selectValue.indexOf(userList[i]["학생아이디"])!=-1){
         classname = userList[i]["수업반"]
         school = userList[i]["학교"]
         grade = userList[i]["학년"]
+        state = userList[i]["등록/휴원 상태"];
+        console.log("state?? " + state);
       }
     }
-    createData(selectValue,selectText,classname);
+
+    if(state.indexOf("휴원") == -1)
+      createData(selectValue,selectText,classname);
 	}
 
   $('body').loadingModal('destroy')
