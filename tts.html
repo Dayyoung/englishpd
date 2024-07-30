@@ -1,0 +1,85 @@
+
+<html>
+  <head>
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1 , viewport-fit=cover">
+    <meta charset="UTF-8" />
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="
+  https://cdn.jsdelivr.net/npm/jquery-loadingModal@1.0.2/js/jquery.loadingModal.min.js
+  "></script>
+  <link href="
+  https://cdn.jsdelivr.net/npm/jquery-loadingModal@1.0.2/css/jquery.loadingModal.min.css
+  " rel="stylesheet">
+  </head>
+
+  <body>
+
+    <textarea class="speechInput" style="width: 50%; max-width: 500px"; rows="20">
+안녕하세요. 저는 영PD입니다.
+만나서 방갑습니다.
+애국가를 불러보겠습니다.
+동해물과 백두산이 마르고 닳도록
+하느님이 보우하사 우리나라 만세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+    </textarea>
+
+    <br>
+    <input type="button" class="speechButton" 
+         value='Speak!' ></input>
+
+
+<script type="text/javascript">
+  
+const message = new SpeechSynthesisUtterance();
+
+
+$(".speechButton").click(function(){
+    if (
+    typeof SpeechSynthesisUtterance === 'undefined' ||
+    typeof window.speechSynthesis === 'undefined'
+    ) {
+    alert('이 브라우저는 음성 합성을 지원하지 않습니다.');
+    return;
+    }
+    var textString = $(".speechInput").val();
+
+    //alert('음성재생');
+    message.lang = 'ko-KR';
+    message.pitch = 1; //0~222
+    message.rate = 1.1; //1~10
+    message.text = textString;
+    message.volume = 1;
+    //message.voice = 2;
+    window.speechSynthesis.speak(message);
+});
+
+function populateVoiceList() {
+  if (typeof speechSynthesis === 'undefined') {
+    return;
+  }
+
+  const voices = window.speechSynthesis.getVoices();
+
+  const voiceList = voices
+    // .filter((voice) => {
+    //   return voice.lang.includes('ko');
+    // })
+    .map((voice) => {
+      return `${voice.name} (${voice.lang})`;
+    });
+  console.log(voiceList);
+}
+
+populateVoiceList();
+</script>
+
+
+  </body>
+</html>
+
+
+
