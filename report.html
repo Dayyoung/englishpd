@@ -619,7 +619,7 @@ var checkSumData = GsheetToJSON('https://docs.google.com/spreadsheets/d/e/2PACX-
 
 var header = getHeadFromCSV(totalListData);
 
-header = header.slice(12,header.length);
+header = header.slice(8,header.length);
 
 var USER;
 
@@ -632,6 +632,10 @@ for (var user of userList) {
 var sameClassUser = [];
 
 for (var user of userList) {
+
+  // console.log(USER["수업반"])
+  // console.log(user["수업반"])
+
   if(USER["수업반"]==user["수업반"]){
    sameClassUser.push(user["학생아이디"])
   }
@@ -838,7 +842,7 @@ for (var i of totalListForUser) {
     //if(i["출석여부"] != '')
     //tbItem.find('.checkValue').html("<br>" + i["출석여부"] + "<br><br>")
 
-
+    //console.log(i["진도"])
     if(i["진도"] != ''){
 
     var removeString = i["진도"].replace(/['"]+/g, '')
@@ -875,9 +879,10 @@ for (var i of totalListForUser) {
 
 
     for(head of header){
+      console.log(head)
       if(i[head] != '') {
         var multiValue = tbItem.find('.multiValue');
-        if(head != "과제평가")
+        if(head != "과제평가" && head != "출결사유")
           multiValue.html(multiValue.html() + head +" : "+ i[head] + "<br>" )
       }
     }
@@ -1018,11 +1023,11 @@ table, th, td {
             <td class="column0 style1 null"></td>
             <td class="column1 style2 null"></td>
             <td class="column2 style3 null"></td>
-            <td class="column3 style9 s style0" colspan="7" style="padding-left:5px;">OPD MONTHLY REPORT</td>
+            <td class="column3 style9 s style0" colspan="7" style="padding-left:5px;">HAKSAN OPD MONTHLY REPORT</td>
 
             <td colspan="2" rowspan="5"  style="border-right: 1px solid #999999 !important;">
             
-          <img src="./young.jpg" style="width: 120px;">
+          <img src="./young.png" style="width: 120px;">
 
             </td>
           </tr> 
