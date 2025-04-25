@@ -717,7 +717,7 @@ var totalListExamForUser = []
 var totalListExamForDate = []
 
 for (var i of totalListForMonth) {
-  if(i[head] != ""){
+  if(i[head] != "" && head != "진도"){
 
     var intValue = 0;
     
@@ -770,7 +770,13 @@ for (var date of uniqueArr){
       if(i[head].indexOf("/") != -1){
         intValue = D2100(i[head]);
       }
-      else if(i[head].indexOf("A") != -1 || i[head].indexOf("B") != -1 || i[head].indexOf("C") != -1 || i[head].indexOf("D") != -1 || i[head].indexOf("E") != -1 || i[head].indexOf("F") != -1){
+      else if(
+        i[head].indexOf("A") != -1 
+        || i[head].indexOf("B") != -1 
+        || i[head].indexOf("C") != -1 
+        || i[head].indexOf("D") != -1 
+        || i[head].indexOf("E") != -1 
+        || i[head].indexOf("F") != -1){
         intValue = G2100(i[head]);
       }else{
         intValue = parseInt(i[head])
