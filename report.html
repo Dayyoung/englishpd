@@ -466,12 +466,13 @@ function drawChart(index, barColor, myColor, head, gData) {
 
         var options = {
           title : head,
+          height : 300,
           vAxis: {title: '점수'},
           hAxis: {title: '기간'},
           seriesType: 'bars',
           series: {2: {type: 'line'}},
           colors: [barColor, myColor, 'red'],
-          vAxis: {minValue: 0}
+          vAxis: {minValue: 60,minValue: 100}
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById("chart"+index));
@@ -661,20 +662,38 @@ for (var i of totalList) {
 function G2100(grade) {
     var intValue = 0;
 
-    if(grade == "A"){
+    if(grade == "A+"){
       intValue = 100
     }
+    if(grade == "A"){
+      intValue = 95
+    }
+    if(grade == "A-"){
+      intValue = 90
+    }
+    if(grade == "B+"){
+      intValue = 88
+    }
     if(grade == "B"){
+      intValue = 85
+    }
+    if(grade == "B-"){
       intValue = 80
     }
+    if(grade == "C+"){
+      intValue = 78
+    }
     if(grade == "C"){
-      intValue = 60
+      intValue = 75
+    }
+    if(grade == "C-"){
+      intValue = 70
     }
     if(grade == "D"){
-      intValue = 40
+      intValue = 60
     }
     if(grade == "F"){
-      intValue = 20
+      intValue = 0
     }
     return intValue;
 }
@@ -776,6 +795,8 @@ for (var date of uniqueArr){
 
     date = date.replaceAll("2024.","")
     date = date.replaceAll("2025.","")
+    date = date.replaceAll("2026.","")
+    date = date.replaceAll("2027.","")
     date = date.replaceAll(".","/")
 
     item.push(date)
@@ -877,13 +898,22 @@ for (var i of totalListForUser) {
     if(i["주간평가"] != '')
     tbItem.find('.examValue').html(tbItem.find('.examValue').html()  + i["주간평가"] + "<br>")
 
+    var index = 1;
 
     for(head of header){
       console.log(head)
       if(i[head] != '') {
         var multiValue = tbItem.find('.multiValue');
-        if(head != "과제평가" && head != "출결사유")
-          multiValue.html(multiValue.html() + head +" : "+ i[head] + "<br>" )
+        if(head != "과제평가" && head != "출결사유"){
+
+            index++;
+
+            if(index%2 == 0){
+              multiValue.html(multiValue.html() +"■"+ head +" : "+ i[head] + "<br>" )
+            }else{
+              multiValue.html(multiValue.html() +"□"+ head +" : "+ i[head] + "<br>" )
+            }
+        }
       }
     }
 
